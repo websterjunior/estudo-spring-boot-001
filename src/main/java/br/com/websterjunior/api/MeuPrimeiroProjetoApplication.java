@@ -6,6 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import br.com.websterjunior.api.utils.SenhaUtils;
+
 @SpringBootApplication
 public class MeuPrimeiroProjetoApplication {
 
@@ -20,6 +22,16 @@ public class MeuPrimeiroProjetoApplication {
 	public CommandLineRunner commandLineRunner () {
 		return args -> {
 			System.out.println("INICIALIZANDO O PROJETO: " + this.nomeAplicacao);
+			
+			String senha = "MinhaSenha12345";
+			String senhaEncoder = SenhaUtils.gerarBCrypt(senha);
+
+			if(SenhaUtils.validaSenha(senha, senhaEncoder)) {
+				System.out.println("Senha OK: " + senhaEncoder);
+			} else {
+				System.out.println("Senha ERRO: " + senhaEncoder);
+			}
+			
 		};
 	}
 	
